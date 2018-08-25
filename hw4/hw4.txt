@@ -1,0 +1,170 @@
+// This is the class for table to include the property of current party
+// and the table name
+class Table{
+	public: 
+		int get_customers_number(); 
+		string get_table_name();
+
+	private:
+		string table name;
+		customer party_name; // one table has one party of customers or no customer
+}
+
+// The abstract Customer class as the base class for the other three customer types
+class Customer{
+	public:
+		//constructor and deconstructor 
+		customer();
+		~customer();
+		//getters and setters for private members
+		int get_customer_size();
+		void set_customer_size(int);
+		Table* get_table();
+		void set_table(Table*);
+		void set_time_order(double);
+		double get_time_order();
+		void set_time_eat_pay_exit(double);
+		double get_set_time_eat_pay_exit();
+
+		// a pure virtual function to get tip rate for different type of customer
+		virtual double get_tip_rate() = 0;
+
+	private:
+		int customer_size; // the size of customer
+		Table* table_for_party; // the table object for this table
+		double time_order; // time to take order
+		double time_eat_pay_exit; // time to eat/pay/exit
+}
+
+//	class WalkIn inherits from the abstract class Customer
+// implement the get_tip_rate() function to return the tip rate for walkin customers
+class WalkIn : public Customer {
+	public:
+		WalkIn();
+		~WalkIn();
+		double get_tip_rate();
+		
+	private:
+		double	tip_rate_two_to_three = 0.15;
+		double  tip_rate_more_than_three = 0.18;
+	
+}
+//	class Reserved inherits from the abstract class Customer
+// implement the get_tip_rate() function to return the tip rate for reserved customers
+class Reserved : public Customer {
+	public:
+		Reserved();
+		~Reserved();
+		double get_tip_rate();
+		
+	private:
+		double	tip_rate_two_to_three = 0.15;
+		double  tip_rate_more_than_three = 0.18;
+		double reserved_time;	
+}
+
+//	class Celebrity inherits from the abstract class Customer
+// implement the get_tip_rate() function to return the tip rate for Celebrity customers
+class Celebrity : public Customer {
+	public:
+		Celebrity();
+		~Celebrity();
+		double get_tip_rate();
+	private:
+		double	tip_rate = 0.25;
+		double  tip_constent_amount;
+	
+}
+
+//The abstract Employee class as the base class for the other three employee types
+class Employee{
+	public:
+		employee();
+		~emplyee();
+		virtual double get_pay_check() = 0;
+		double get_working_hour();
+		set_working_hour(double);
+
+	private:
+		double working_hour; // the working_hour to calculate the wage for each employee
+}
+
+//	class Waiter inherits from the abstract class Employee
+// implement the get_pay_check() function to return the pay_check by 
+// saving a list of the information of all the Table objects the waiter served and a list of 
+// Table objects the waiter and the working hour to calculate the pay_check for the waiter
+class Waiter : public Employee {
+	public:
+		//deconstructer, constructer and getters and setters
+		Waiter();
+		~Waiter();
+		double get_pay_check();
+		set_waiting_time(double time);
+		double get_waiting_time();
+		double get_tips();
+		
+	private:
+		list<Table*> waiting_table;
+		list<Table*> past_tables;
+
+		// the waiting hour in the kitchen
+		double waiting_time;
+
+}
+
+// class Chef inherits from the abstract class Employee
+// implement the get_pay_check() function by using the skill_level
+// and the working_hour to calculate the pay_check
+class Chef : public Employee {
+	public:
+	// constructor/deconstructor and getters and setters
+		Chef();
+		~Chef();
+		double get_pay_check();
+		void calculate_waiting_time();
+		double get_waiting_time();
+		void set_waiting_time(double);
+		queque<string> get_current_order;
+		set_current_order(string);
+
+	private:
+		bool skill_level;
+		double waiting_time;
+		queque<string> current_order;
+}
+
+// class Host inherits from the abstract class Employee
+// implement the get_pay_check() by using the working hour
+class Host : public Employee {
+	public:
+		Host();
+		~Host();
+		double get_pay_check();
+	private:
+}
+
+// class Restaurant has-a empolyee and has-a customer and has-a owner
+// by using the list_of_employees to caclulatet the gross_employee_earn
+// and by using the list of past tables to calculatet the total gross earn
+
+class Restaurant{
+	public:
+		Restaurant();
+		~Restaurant();
+		list<employee*> get_list_of_employee();
+		list<Table*> get_list_of_tables();
+		double calculate_gross_employee_earn();
+		double calculate_gross_revenue();
+	private:
+		list<employee*> list_of_employee;
+		list<Table*> list_of_table;
+}
+
+// set and get revenue by using getter and setter
+class Owner{
+	public: 
+		get_revenue();
+		set_revenue();
+	private:
+		double revenue;
+}

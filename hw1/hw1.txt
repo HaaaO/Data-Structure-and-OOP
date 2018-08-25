@@ -1,0 +1,28 @@
+/------Problem 1---------/
+1.a: 1,4
+
+1.b: 2,3,4
+
+1.c: 2,3,4,5
+
+1.d: 2
+
+1.e: 2,3,4,5
+
+/------Problem 2---------/
+
+2.a: 3
+
+2.b: 1 
+
+2.c.1: git add hw1q2b.cpp
+
+2.c.2: git log -p -3 
+
+2.d: This will commit those three files and make them part of repository history
+
+2.e: git clone git@github.com:usc-csci104-spring2018/hw-zhonghas.git
+
+
+
+

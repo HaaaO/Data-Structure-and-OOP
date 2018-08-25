@@ -1,0 +1,98 @@
+---------------------------------------------Q1c--------------------------------------------------------------
+	My array: 
+
+		1 3 5 7 9 2 4 6 8 10
+
+	My explanation: 
+
+		1st partition: 
+		Because of the median of three, the left = 0, right = 9, 
+		middle = (0+9)/2 = 4. Therefore, the my_array[left] = 1; my_array[right] = 10;
+		my_array[middle] = 9, so the pivot will be the my_array[middle] = 9, and 9 is the 
+		second largest element in the array.
+		The array after 1st partition will be : 1 3 5 7 2 4 6 8 9 10
+
+		2nd partition:
+		The new subarray becomes: 1 3 5 7 2 4 6 8
+		Because of the median of three, the left = 0, right = 7,
+		middle = (0+7)/2 = 3. Therefore, the my_array[left] = 1; my_array[right] = 8;
+		my_array[middle] = 7, so the pivot will be the my_array[middle] = 7, and 7 is the 
+		second largest element in the subarray.
+		The array after 2nd partition will be : 1 3 5 2 4 6 7 8 9 10
+
+		3rd partition:
+		The new subarray becomes: 1 3 5 2 4 6, the left = 0, right = 5, 
+		middle = (0+5)/2 = 2. Therefore, the my_array[left] = 1; my_array[right] = 6;
+		my_array[middle] = 5, so the pivot will be the my_array[middle] = 5, and 5 is the 
+		second largest element in the subarray.
+		The array after 3rd partition will be : 1 3 2 4 5 6 7 8 9 10
+
+		4th partition:
+		The new subarray becomes: 1 3 2 4, the left = 0, right = 3,
+		middle = (0 + 3)/2 = 1. Therefore, the my_array[left] = 1; my_array[right] = 4;
+		my_array[middle] = 3, so the pivot will be the my_array[middle] = 3, and 3 is the 
+		second largest element in the subarray.
+		The array after 4th partition will be : 1 2 3 4 5 6 7 8 9 10.
+
+		5th partition:
+		The new subarray becomes: 1 2, the left = 0, right = 1,
+		middle = (0+1)/2 = 0. Therefore, the my_array[left] = 1; my_array[right] = 2;
+		my_array[middle] = 1, so the pivot will be the my_array[middle] = 1, and 1 is the 
+		second largetst element in the sub array.
+		The array after 5th partition will be : 1 2 3 4 5 6 7 8 9 10.
+
+		It's sorted after 5 times of partition.
+
+
+
+---------------------------------------------Q2--------------------------------------------------------------
+
+	My array:
+
+		1, 2, 3, 4, 5, ............. (n-3), (n-2), (n-1), n^100
+
+		Target = (n-1)
+
+	My algorithm
+
+		int InterpolationSearch(T x, int l , int r) {
+			if (r < l) 
+				return −1;
+
+
+			if ( a [ r ] == a [ l ] ) {
+			if (x == a[r]) 
+				return r; 
+			return −1;
+			}
+
+			int m= (x−a[l])/(a[r]−a[l])∗(r−l)+l;
+			if (a[m] = x) return m;
+			if (a[m] < x) return InterpolationSearch(x, m+1, r); 
+			return InterpolationSearch (x , l , m−1);
+
+			}
+
+	My explanation:
+
+		Our goal to acheive is to let the value of m to be 1,2,3,4,5,6.........(n-1)
+
+		In the equaion, the checking index number is m= (x−a[l])/(a[r]−a[l])∗(r−l)+l,
+		so if (x−a[l])/(a[r]−a[l])∗(r−l) could be 0 all the time, m = l will be true every
+		recursive call. Therefore, the last two lines in the interpolation search will increment
+		l by 1 because a[m] will always be smaller than x when m = l. Finally, l' = l++, so the 
+		m' = m + 1. Therefore, it will check from index 0 to n-1, because index n will be queried 
+		all the time, so all the elements will be queried in this case.
+
+		In my array, (x−a[l])∗(r−l)/(a[r]−a[l]) = (((n-1)-a[l]) * (r-l))/ (n^100 - a[l]).
+		The maximum value Numerator : Max(((n-1)-a[l]) * (r-l)) = (n-2)*n
+		The minimum value for Denominator : Min(n^100 - a[l]) = n^100 - n + 1
+
+		Therefore, Max(((n-1)-a[l]) * (r-l)) is way smaller than Min(n^100 - a[l]),
+		so the will always be (x−a[l])/(a[r]−a[l])∗(r−l) = 0 in the recursive call.
+		So the m = l every time and get incremented by 1 every recursive call. Because 
+		l = 0 initially, so the m will be 0,1,2,3,4,5 ..... (n-1)
+
+		All in all, my array will be the worst case for the interpolation search in an array
+		with size of n that will have to query every element before it will find the target.
+

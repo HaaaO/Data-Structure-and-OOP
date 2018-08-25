@@ -1,0 +1,168 @@
+----------------------------Problem 1-------------------------
+
+1.a: README.md: unmodified
+
+1.b: README.md: modified; fun_problem.txt: untracked
+
+1.c: README.md: staged; fun_problem.txt: staged
+
+1.d: README.md: modified; fun_problem.txt: modified
+
+1.e: README.md: staged; fun_problem.txt: unmodified, 
+nothing in the file, "So far, so good" is no longer there. 
+Because " git checkout -- filename" will undo the 
+modification of the file and change that file's content to 
+the last commit.
+
+1.f: README.md: modified, because although the file was staged, 
+but the modification of it takes it back to the modified stage.
+
+----------------------------Problem 3----------------------
+
+2.1: a list of names of dishes on the menu(string)
+
+	For this implementation, because it requires the order of items,
+	the list is the most suitable ADT to emphasize order in this case.
+	In contrast, neithe the set or map cares about order, so both
+	of them are not suitable.
+
+
+
+2.2: a set of the names of movies in the star war universe(string)
+
+	In this implementation, it will emphasize more that whether the
+	movies are in the star war universe or not. It only cares about 
+	two states: presence or absence. Therefore, it meets the characteristics
+	of the set. Besies, the data type for the name of movies should 
+	be string.
+
+
+
+
+
+2.3: a map of structs consisting of a ISBN as the key(double) and 
+the name of book(string)
+	
+	In this scenario, it needs to implement the directory of books to 
+	let the user be able to get access to the name of the book by using
+	the ISBN as a key. Therefore, only the map is suitable for implementing
+	a directory. Besides, the data type for the ISBN should be double because 
+	it will be out of size for integer. The data type for the name of
+	book should be string.
+
+
+
+
+2.4: a map of structs consisting of a year(integer) and a set of names
+of the movies in that year(string).
+
+	In this scenario, first we need to implement a directory of the 
+	movies released in the certain year. In this case , the year acts
+	as the key. Therefore, map is the most suitable for this directory.
+	Besides, for every struct, it needs to have the year acting as the key
+	and a set of movies. The reason to choose set is that we only care about
+	whether this movie was released in that certain year or not. It's a 
+	presence/absence problem. Therefore, the set is the best for it. Besides,
+	the data time for the year should be integer, and the name of the movies should
+	be string.
+	
+
+
+2.5: a map of structs consisting of a season number(integer), an episode
+number(integer) and the name of this specific episode(string).
+
+	In this scenario, we need to implement a directory of game of thrones episodes,
+	both the season number and the episode number will be the lookup key in the 
+	directory. Therefore, the ADT that is most suitable for directory is map. Besides,
+	the data type for both the season number and the episode numbers should be integer
+	and the name of the specific spisode should be string.
+
+
+
+
+
+----------------------------Problem 4----------------------
+
+The answer: 5->4->3->2->1
+
+The explanation: 
+In the funcA and funcB, the program used recursive methods to 
+reverse the order of the list so as to have the prvious head becomes 
+tail, and the previous tail becomes the new head.
+
+FuncA: 
+the pointer r is used to keep track of the address of the previous tail, 
+which will be the head of the list. Besides, because the pointer will be 
+returned by the funcB is the head of the previous list, and the tail of 
+the new list. In order to keep track of the new head, pointer r is very 
+necessary.
+
+FuncB: 
+
+It is the head recursion function. FuncB first received the old head of 
+the list, it will start the recursive calls from FuncB(head) to FuncB(tail) to
+FuncB(tail->next). In FuncB(tail->next), it will trigger the base case, and start
+the implementation. In every recursive call, the implementation will reverse the 
+order of the list. For example, in the FuncB(tail), because the FuncB(tail->next) 
+returned nullptr, there was no implementation, so return the tail. After that,
+int FuncB(one_node_before_tail), p = FuncB(tail) = tail. The implementation will
+let tail->next = in = one_node_before_tail. Therefore, every recursive call will
+do the same, to point the next of the current node to the previous node. Therefore,
+the list will be reversed. The process is also showen in the call tree at below
+
+For example: &1->&2->&3->&4->&5 (&number means the address of the node that stores
+the number
+
+FuncB(&1)
+
+		FuncB(&2)
+
+				FuncB(&3)
+
+						FuncB(&4)
+
+								FuncB(&5)
+
+										FuncB(&(5->next))
+										return nullptr
+
+								return &5 
+						in =&4		
+						p = FuncB(&5)
+						p = &5
+						&5->next =in
+						&5->next =&4
+						return &4
+
+				in =&3
+				p = FuncB(&4)
+				p =&4
+				&4->next = in
+				&4->next = &3
+				return &3
+
+		in =&2
+	    p = FuncB(&3)
+		p =&3
+		&3->next = in
+		&3->next = &2
+		return &2
+
+in =&1
+p = FuncB(&2)
+p =&2
+&2->next = in
+&2->next = &1
+return &1
+
+
+
+
+
+
+
+
+
+
+
+
